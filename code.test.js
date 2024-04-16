@@ -1,6 +1,7 @@
 const fs = require('fs');
 const jsc = require('jsverify');
 eval(fs.readFileSync('code.js')+'');
+const assert = require('assert');
 
 a = [
   [1 , 2],
@@ -47,12 +48,14 @@ e = [
 ]
 
 
-JSON.stringify(are_isomorphic(a, b)) == true;
+assert(are_isomorphic(a, b) == true);
 
-JSON.stringify(are_isomorphic(c, d)) == true;
+assert(are_isomorphic(c, d) == true);
 
-JSON.stringify(are_isomorphic(a, c)) == false;
+assert(are_isomorphic(a, c) == false);
 
-JSON.stringify(are_isomorphic(a, e)) == false;
+assert(are_isomorphic(a, e) == false);
+
+console.log('all tests passed');
 
 
