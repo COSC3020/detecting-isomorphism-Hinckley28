@@ -1,7 +1,6 @@
 
 const fs = require('fs');
 const jsc = require('jsverify');
-const assert = require('assert');
 eval(fs.readFileSync('code.js')+'');
 
 const a = [
@@ -48,27 +47,26 @@ const e = [
   [3, 0],
 ];
 
-jsc.assert(
-  jsc.forall(jsc.constant(a), jsc.constant(b), function (graphA, graphB) {
-    return JSON.stringify(are_isomorphic(graphA, graphB)) === JSON.stringify(true);
-  })
-);
+const test1 = 
+  jsc.forall(jsc.constant(a), jsc.constant(b), function (a, b) {
+    return JSON.stringify(are_isomorphic(a, b)) === JSON.stringify(true);
+  });
+  jsc.assert(test1);
 
-jsc.assert(
-  jsc.forall(jsc.constant(c), jsc.constant(d), function (graphC, graphD) {
-    return JSON.stringify(are_isomorphic(graphC, graphD)) === JSON.stringify(true);
-  })
-);
+const test2 =
+  jsc.forall(jsc.constant(c), jsc.constant(d), function (c, d) {
+    return JSON.stringify(are_isomorphic(c, d)) === JSON.stringify(true);
+  });
+  jsc.assert(test2);
 
-jsc.assert(
-  jsc.forall(jsc.constant(a), jsc.constant(c), function (graphA, graphC) {
-    return JSON.stringify(are_isomorphic(graphA, graphC)) === JSON.stringify(false);
-  })
-);
+const test3 =
+  jsc.forall(jsc.constant(a), jsc.constant(c), function (a, c) {
+    return JSON.stringify(are_isomorphic(a, c)) === JSON.stringify(false);
+  });
+  jsc.assert(test3);
 
-jsc.assert(
-  jsc.forall(jsc.constant(a), jsc.constant(e), function (graphA, graphE) {
-    return JSON.stringify(are_isomorphic(graphA, graphE)) === JSON.stringify(false);
-  })
-);
-console.log('all tests passed');
+const test4 =
+  jsc.forall(jsc.constant(a), jsc.constant(e), function (a, e) {
+    return JSON.stringify(are_isomorphic(a, e)) === JSON.stringify(false);
+  });
+  jsc.assert(test4);
