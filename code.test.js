@@ -1,5 +1,4 @@
 const fs = require('fs');
-const jsc = require('jsverify');
 eval(fs.readFileSync('code.js')+'');
 const assert = require('assert');
 
@@ -57,5 +56,3 @@ assert(are_isomorphic(a, c) == false);
 assert(are_isomorphic(a, e) == false);
 
 console.log('all tests passed');
-
-
