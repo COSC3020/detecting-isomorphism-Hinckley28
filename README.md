@@ -17,4 +17,4 @@ the function and run automatically when you commit through a GitHub action.
 
 What is the worst-case big $\Theta$ time complexity of your algorithm?
 
-Answer: The worst case $\Theta$ time complexity for my algorithm would be $\Theta(V!)$.
+Answer: The worst case $\Theta$ time complexity for my algorithm would be $\Theta(V! * V_1 * V_2)$. This is because the recursive call for the helper function lies in two nested for loops that iterate through the graph1 vertices and the graph2 vertices. So the worst case would come from all possible permutations of mappings being explored. All time complexities of other functions are ignored because the dominant term is $(V! * V^2)$.
