@@ -14,8 +14,14 @@ function are_isomorphic(graph1, graph2) {
     return false;
   }
 
-  const mapping = {};
-  return isomorphicHelper(graph1, graph2, mapping);
+  //const mapping = {};
+  let mapping = mapPerms(graph1);
+  for (let i = 0; i < mapping.length; i++) {
+    if (isomorphicHelper(graph1, graph2, mapping[i])) {
+      return true;
+  }
+}
+  return false;
 }
 
 function isomorphicHelper(graph1, graph2, mapping) {
@@ -31,29 +37,31 @@ function isomorphicHelper(graph1, graph2, mapping) {
     }
     return true;
   }
+}
 
-  for (let i = 0; i < graph1.length; i++) {
-    if (!mapping.hasOwnProperty(i)) {
-      const vertex1 = i;
-      const degree1 = graph1[vertex1].length;
+function mapPerms(graph1) {
+  const permutations = [];
+  const used = new Array(graph1.length).fill(false);
 
-      for (let j = 0; j < graph2.length; j++) {
-        if (graph2[j].length === degree1 && !Object.values(mapping).includes(j)) {
-          const vertex2 = j;
-          mapping[vertex1] = vertex2;
-          //console.log(mapping);
+  function backtrack(i, mapping) {
+    if (i === graph1.length) {
+      permutations.push(Object.assign({}, mapping));
+      return;
+    }
 
-          if (isomorphicHelper(graph1, graph2, mapping)) {
-            return true;
-          }
-          delete mapping[vertex1];
-          break;
-        }
+    for (let j = 0; j < graph1.length; j++) {
+      if (!used[j]) {
+        used[j] = true;
+        mapping[i] = j;
+        backtrack(i + 1, mapping);
+        //console.log(currentMapping);
+        used[j] = false;
       }
     }
   }
 
-  return false;
+  backtrack(0, {});
+  return permutations;
 }
 
 
@@ -85,91 +93,12 @@ function compareNeighbors(neighbors1, neighbors2, mapping) {
     return false;
   }
   for (const neighbor of neighbors1) {
+    //console.log('neighbor' +neighbor);
     const mappedNeighbor = mapping[neighbor];
+    //console.log('mappedneighbor' +mappedNeighbor);
     if (!neighbors2.includes(mappedNeighbor)) {
       return false;
     }
   }
   return true;
 }
-
-/*graph1 = [
-  [1 , 2],
-  [0 , 3], 
-  [0 , 3],
-  [1 , 2 , 4],
-  [3],
-]
-
-graph2 = [
-  [4],
-  [4 , 2], 
-  [1 , 3],
-  [2 , 4],
-  [0 , 1 , 3],
-]
-
-result = are_isomorphic(graph1, graph2);
-console.log(result);
-
-graph3 = [
-  [1],
-  [0, 2],
-  [1, 3, 4],
-  [2],
-  [2, 5, 6],
-  [4],
-  [4],
-]
-
-graph4 = [
-  [3],
-  [3],
-  [4, 6],
-  [0, 1, 4],
-  [2, 3, 5],
-  [4],
-  [2],
-]
-
-result2 = are_isomorphic(graph3, graph4);
-console.log(result2);
-
-graph5 = [
-  [1 , 2],
-  [0 , 3], 
-  [0 , 3],
-  [1 , 2 , 4],
-  [3],
-]
-
-graph6 = [
-  [1 , 2],
-  [0 , 3], 
-  [0 , 3],
-  [1 , 2 , 4],
-  [3],
-  [],
-]
-
-result3 = are_isomorphic(graph5, graph6);
-console.log(result3);
-
-graph7 = [
-  [1 , 2],
-  [0 , 3], 
-  [0 , 3],
-  [1 , 2 , 4],
-  [3],
-];
-
-graph8 = [
-  [1 , 2],
-  [0 , 3], 
-  [0 , 3],
-  [1 , 2 , 4],
-  [3, 0],
-]
-
-result4 = are_isomorphic(graph7, graph8);
-console.log(result4);*/
