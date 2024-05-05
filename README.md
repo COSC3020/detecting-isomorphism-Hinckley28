@@ -17,4 +17,4 @@ the function and run automatically when you commit through a GitHub action.
 
 What is the worst-case big $\Theta$ time complexity of your algorithm?
 
-Answer: The worst case $\Theta$ time complexity for my algorithm would be $\Theta((V^2)!)$. In this case, the isomorphic helper function would iterate through every vertex in graph1 and graph2 for every permutation of the possible mappings. 
+Answer: The worst case $\Theta$ time complexity for my algorithm would be $\Theta(V! * V)$.
