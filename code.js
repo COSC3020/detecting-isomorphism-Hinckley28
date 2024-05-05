@@ -54,7 +54,7 @@ function mapPerms(graph1) {
         used[j] = true;
         mapping[i] = j;
         backtrack(i + 1, mapping);
-        //console.log(currentMapping);
+        //console.log(mapping);
         used[j] = false;
       }
     }
