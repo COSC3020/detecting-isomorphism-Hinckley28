@@ -16,3 +16,10 @@ the function and run automatically when you commit through a GitHub action.
 ## Runtime Analysis
 
 What is the worst-case big $\Theta$ time complexity of your algorithm?
+
+Answer: The worst case $\Theta$ time complexity for my algorithm would be $\Theta(V! * V)$.
+
+Sources: Gemini AI: Helped write some of the mapPerms function. These lines include pushing the mapped permutations to the permutations array and correctly calling the recursive function. Also gave me the idea of using an array to keep track of permutations already used. 
+
+https://www.youtube.com/watch?v=RoDR40UG--s
+https://www.cs.du.edu/~ftl/courses/2673s03/graph3.html
